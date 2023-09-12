@@ -1,0 +1,4 @@
+[submodule "external/features/latest"]
+	path = external/features/latest
+	url = https://github.com/openae-io/features.git
+	branch = main

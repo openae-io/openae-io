@@ -1,0 +1,32 @@
+:root {
+  --vp-c-brand: hsl(215, 90%, 50%);
+  --vp-c-brand-light: hsl(215, 90%, 60%);
+  --vp-c-brand-lighter: hsl(215, 90%, 70%);
+  --vp-c-brand-dark: hsl(215, 90%, 40%);
+  --vp-c-brand-darker: hsl(215, 90%, 30%);
+}
+
+.VPHomeHero {
+  padding-top: 64px !important;
+  margin-top: 0px !important;
+  margin-bottom: 20px;
+  min-height: 400px;
+  background-color: #000 !important;
+  background-image: url("/banner.png");
+  background-size: 1200px;
+  background-position-x: center;
+  background-position-y: top;
+  background-repeat: no-repeat;
+}
+
+.VPHomeHero h1.name span {
+  font-size: 1.4em;
+  /* color: #fff !important; */
+  /* -webkit-text-fill-color: #fff !important; */
+  text-shadow: 2px 2px 5px #000;
+}
+
+.VPHomeHero p.tagline {
+  color: #fff !important;
+  text-shadow: 2px 2px 5px #000;
+}
