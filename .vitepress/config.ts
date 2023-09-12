@@ -173,10 +173,9 @@ export default defineConfig({
 
     editLink: {
       pattern: ({ filePath }) => {
-        if (filePath.startsWith("features/")) {
+        if (filePath.startsWith("external/features/")) {
           const filePathSplit = filePath.split("/");
-          const fileName = filePathSplit.at(-1);
-          const id = fileName.split(".").at(0);
+          const id = filePathSplit.at(3);  // 0: external, 1: features, 2: version, 3: id
           return `https://github.com/openae-io/features/edit/main/${id}/README.md`;
         } else {
           return `https://github.com/openae-io/openae-io/edit/main/${filePath}`;
