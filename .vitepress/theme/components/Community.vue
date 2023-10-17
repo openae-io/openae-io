@@ -23,6 +23,7 @@ const imgUrl = (filename: string) => `/community/${filename}`;
 
 <style scoped>
 .member-container {
+  margin-top: 16px;
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
