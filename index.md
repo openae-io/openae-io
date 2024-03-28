@@ -27,9 +27,6 @@ features:
 
 <script setup>
 import Community from '@theme/components/Community.vue'
-import HomeContent from '@theme/components/HomeContent.vue'
 </script>
 
-<HomeContent>
-  <Community />
-</HomeContent>
+<Community />
