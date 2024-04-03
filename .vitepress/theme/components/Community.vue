@@ -36,6 +36,8 @@ const imgUrl = (filename: string) => `/community/${filename}`;
   height: 128px;
   padding: 20px;
   margin: 0 3px;
+  justify-content: center;
+  align-content: center;
 
   background-color: #fff;
   border-radius: 10px;
