@@ -1,4 +1,4 @@
-import fs from "fs";
+import fs from "node:fs";
 import fm from "front-matter";
 
 export const pathFeatures = "./external/features/latest";
@@ -26,9 +26,9 @@ export const parseFeatures = (): Feature[] =>
     return [
       {
         id: feature,
-        meta: readmeParsed.attributes,
+        meta: (readmeParsed.attributes as Record<string, any>),
         readme: readmeParsed.body,
-        code: fs.existsSync(pathCodePy) ? fs.readFileSync(pathCodePy) : null,
+        code: fs.existsSync(pathCodePy) ? fs.readFileSync(pathCodePy, "utf8") : null,
       },
     ];
   });
