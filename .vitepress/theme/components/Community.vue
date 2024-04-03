@@ -28,14 +28,14 @@ const imgUrl = (filename: string) => `/community/${filename}`;
   flex-wrap: wrap;
   justify-content: center;
   align-content: center;
-  gap: 12px;
+  gap: 16px;
 }
 
 .member {
   max-width: 300px;
   height: 128px;
   padding: 20px;
-  margin: 0 3px;
+  margin: 0px;
   justify-content: center;
   align-content: center;
 
