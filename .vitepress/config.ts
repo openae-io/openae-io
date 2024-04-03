@@ -1,5 +1,4 @@
 import { defineConfig } from "vitepress";
-import mathjax3 from "markdown-it-mathjax3";
 import tasklists from "markdown-it-task-lists";
 
 import { parseFeatures } from "../features";
@@ -82,9 +81,9 @@ export default defineConfig({
 
     editLink: {
       pattern: ({ filePath }) => {
-        if (filePath.startsWith("external/features/")) {
-          const filePathSplit = filePath.split("/");
-          const id = filePathSplit.at(3);  // 0: external, 1: features, 2: version, 3: id
+        if (filePath.startsWith("features/algorithm-")) {
+          const re = /algorithm-([\w\d\.]+)-([\w-]+)/;
+          const [_, version, id] = filePath.match(re) ?? ["", "latest", ""];
           return `https://github.com/openae-io/features/edit/main/${id}/README.md`;
         } else {
           return `https://github.com/openae-io/openae-io/edit/main/${filePath}`;
@@ -107,9 +106,9 @@ export default defineConfig({
     },
     math: true,
   },
-  srcExclude: ["README.md"],
+  srcExclude: ["README.md", "external/**"],
   rewrites: {
-    "external/features/:version/:id/README.md": "features/:version/:id/index.md",
     "features/algorithms-:version.md": "features/:version/index.md",
+    "features/algorithm-:version-:id.md": "features/:version/:id/index.md",
   },
 });

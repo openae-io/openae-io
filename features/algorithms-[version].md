@@ -3,13 +3,15 @@ editLink: false
 ---
 
 <script setup lang="ts">
-import { data as featureData } from "../features.data";
-const features = featureData.data;
+import { useData  } from "vitepress";
+import { data as features } from "../features.data";
+
+const { params } = useData();
 </script>
 
 # Algorithms
 
-**Version**: <Badge type="warning" text="latest" />
+**Version**: <Badge type="warning" :text="params.version" />
 
 <table>
   <tr>

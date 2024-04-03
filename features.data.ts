@@ -1,10 +1,12 @@
-import { pathFeatures, parseFeatures } from "./features";
+import { defineLoader } from "vitepress";
+import { pathFeatures, parseFeatures, Feature } from "./features";
 
-export default {
+declare const data: Feature[];
+export { data };
+
+export default defineLoader({
   watch: [`./${pathFeatures}/**/*`],
   load() {
-    return {
-      data: parseFeatures(),
-    };
+    return parseFeatures();
   },
-};
+});
