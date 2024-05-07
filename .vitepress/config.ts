@@ -60,7 +60,7 @@ export default defineConfig({
                 link: "/features/latest/",
                 collapsed: true,
                 items: parseFeatures().map((feature) => ({
-                  text: feature.id,
+                  text: feature.meta.title,
                   link: `/features/latest/${feature.id}/`,
                 })),
               },
