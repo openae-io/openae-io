@@ -10,15 +10,3 @@ playgroundUrl.searchParams.set("code", btoa(params.value.code ?? ""));
 <a href="../">Algorithms</a> | <a href="../">latest</a> | <a href="./">{{ params.id }}</a>
 
 <!-- @content -->
-
-## Code
-
-::: code-group
-
-```py-vue [code.py]
-{{ params.code }}
-```
-
-:::
-
-<VPButton text="Run in playground" :href="playgroundUrl.href" target="_blank" />
