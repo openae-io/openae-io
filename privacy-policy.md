@@ -1,3 +1,9 @@
+---
+sidebar: false
+prev: false
+next: false
+---
+
 # Privacy policy
 
 ## An overview of data protection

@@ -1,3 +1,9 @@
+---
+sidebar: false
+prev: false
+next: false
+---
+
 # Legal notice
 
 ## Information pursuant to § 5 TMG
