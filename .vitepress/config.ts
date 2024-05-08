@@ -94,9 +94,14 @@ export default defineConfig({
 
     footer: {
       message: `
-        Released under the <a href="https://github.com/openae-io/openae-io/blob/main/LICENSE">MIT License</a>.
-        <br/>
-        Image by <a href='https://www.freepik.com/free-vector/colorful-equalizer-wave-background_6779942.htm'>Freepik</a>.
+        <p>
+          Released under the <a href="https://github.com/openae-io/openae-io/blob/main/LICENSE">MIT License</a>.
+          Image by <a href='https://www.freepik.com/free-vector/colorful-equalizer-wave-background_6779942.htm'>Freepik</a>.
+        </p>
+        <p>
+          <a href="/legal-notice">Legal notice</a> |
+          <a href="/privacy-policy">Privacy policy</a>
+        </p>
       `,
     },
   },
