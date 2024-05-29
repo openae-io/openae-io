@@ -25,12 +25,15 @@ function getPlaygroundUrl(code: string) {
 const makeCodeSection = (code: string) => `
 ## Code
 
-::: code-group
+::: info
+The following snippet is written in a generic and unoptimized manner.
+The code aims to be comprehensible to programmers familiar with various programming languages and may not represent the most efficient or idiomatic Python practices.
+:::
 
+::: code-group
 \`\`\`py [code.py]
 ${code}
 \`\`\`
-
 :::
 
 <VPButton text="Run in playground" href="${getPlaygroundUrl(code)}" />
