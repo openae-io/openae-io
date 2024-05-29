@@ -28,6 +28,7 @@ const makeCodeSection = (code: string) => `
 ::: info
 The following snippet is written in a generic and unoptimized manner.
 The code aims to be comprehensible to programmers familiar with various programming languages and may not represent the most efficient or idiomatic Python practices.
+Please refer to [implementations](/features/implementations) for optimized implementations in different programming languages.
 :::
 
 ::: code-group
