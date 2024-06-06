@@ -21,7 +21,12 @@
   },
   {
     "alt": "Mondaic",
-    "href": "https://mondaic.com/",
+    "href": "https://mondaic.com",
     "img": "mondaic.jpg"
+  },
+  {
+    "alt": "University of Birmingham",
+    "href": "https://www.birmingham.ac.uk",
+    "img": "uni-birmingham.png"
   }
 ]
