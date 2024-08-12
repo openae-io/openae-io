@@ -28,5 +28,10 @@
     "alt": "University of Birmingham",
     "href": "https://www.birmingham.ac.uk",
     "img": "uni-birmingham.png"
+  },
+  {
+    "alt": "University of Illinois Chicago - Nondestructive Evaluation Laboratory",
+    "href": "https://nde.lab.uic.edu",
+    "img": "uic-nde.svg"
   }
 ]
