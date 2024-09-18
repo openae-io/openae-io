@@ -7,6 +7,16 @@ import { parseFeatures } from "../features";
 export default defineConfig({
   title: "OpenAE",
   description: "Empower Acoustic Emission with Open Standards",
+  head: [
+    [
+      "script",
+      {
+        defer: "",
+        src: "https://cloud.umami.is/script.js",
+        "data-website-id": "c05feaf8-6f9b-4108-bb92-e1143e9dbba9",
+      },
+    ],
+  ],
   themeConfig: {
     logo: "/icon.png",
 
@@ -112,6 +122,6 @@ export default defineConfig({
     "features/algorithm-:version-:id.md": "features/:version/:id/index.md",
   },
   sitemap: {
-    hostname: "https://openae.io"
+    hostname: "https://openae.io",
   },
 });
