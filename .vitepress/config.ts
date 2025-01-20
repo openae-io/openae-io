@@ -119,7 +119,7 @@ export default defineConfig({
   srcExclude: ["README.md", "external/**"],
   rewrites: {
     "features/algorithms-:version.md": "features/:version/index.md",
-    "features/algorithm-:version-:id.md": "features/:version/:id/index.md",
+    "features/algorithm-:version--:id.md": "features/:version/:id/index.md",
   },
   sitemap: {
     hostname: "https://openae.io",
