@@ -90,11 +90,9 @@ export default defineConfig({
     socialLinks: [{ icon: "github", link: "https://github.com/openae-io" }],
 
     editLink: {
-      pattern: ({ filePath }) => {
+      pattern: ({ filePath, params }) => {
         if (filePath.startsWith("features/algorithm-")) {
-          const re = /algorithm-([\w\d\.]+)-([\w-]+)/;
-          const [_, version, id] = filePath.match(re) ?? ["", "latest", ""];
-          return `https://github.com/openae-io/features/edit/main/${id}/README.md`;
+          return `https://github.com/openae-io/features/edit/main/${params.id}/README.md`;
         } else {
           return `https://github.com/openae-io/openae-io/edit/main/${filePath}`;
         }
