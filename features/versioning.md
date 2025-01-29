@@ -14,7 +14,7 @@ The feature extraction algorithms are versioned as a set of features so implemen
 The patch number is only used for the implementations.
 
 ::: info
-The first version `v1.0.0` is planed for Dezember 2023.
+The first version `v1.0.0` is planed for 2025.
 :::
 
 ## Rules
