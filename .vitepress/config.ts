@@ -103,8 +103,10 @@ export default defineConfig({
     footer: {
       message: `
         Image by <a href='https://www.freepik.com/free-vector/colorful-equalizer-wave-background_6779942.htm'>Freepik</a>.
-        <br />
-        <a href="/legal-notice">Legal notice</a> | <a href="/privacy-policy">Privacy policy</a>
+        <br/>
+        <a href="/legal-notice">Legal notice</a> |
+        <a href="/privacy-policy">Privacy policy</a> | 
+        Licensed under <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="license noopener noreferrer">CC BY 4.0</a>
       `,
     },
   },
