@@ -7,6 +7,8 @@ const playgroundUrl = new URL(import.meta.env.VITE_FEATURES_PLAYGROUND_URL);
 playgroundUrl.searchParams.set("code", btoa(params.value.code ?? ""));
 </script>
 
-<a href="../">Algorithms</a> | <a href="../">latest</a> | <a href="./">{{ params.id }}</a>
+<a href="../../">Features</a> |
+<a href="../">latest</a> |
+<a href="./">{{ params.id }}</a>
 
 <!-- @content -->

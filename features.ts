@@ -1,6 +1,7 @@
 import fs from "node:fs";
 import fm from "front-matter";
 import { loadEnv } from "vitepress";
+import { readFileIfExists } from "./utils";
 
 export const pathFeatures = "./external/features/latest";
 
@@ -9,10 +10,6 @@ export interface Feature {
   meta: Record<string, any>;
   readme: string;
   code: string | null;
-}
-
-function readFileIfExists(path: string): string | null {
-  return fs.existsSync(path) ? fs.readFileSync(path, "utf8") : null;
 }
 
 function getPlaygroundUrl(code: string) {
@@ -28,7 +25,7 @@ const makeCodeSection = (code: string) => `
 ::: info
 The following snippet is written in a generic and unoptimized manner.
 The code aims to be comprehensible to programmers familiar with various programming languages and may not represent the most efficient or idiomatic Python practices.
-Please refer to [implementations](/features/implementations) for optimized implementations in different programming languages.
+Please refer to [implementations](/library/) for optimized implementations in different programming languages.
 :::
 
 ::: code-group
@@ -40,8 +37,8 @@ ${code}
 <VPButton text="Run in playground" href="${getPlaygroundUrl(code)}" />
 `;
 
-export const parseFeatures = (): Feature[] =>
-  fs.readdirSync(pathFeatures).flatMap((feature) => {
+export function parseFeatures(): Feature[] {
+  return fs.readdirSync(pathFeatures).flatMap((feature) => {
     const pathFeature = `${pathFeatures}/${feature}`;
     const pathReadme = `${pathFeature}/README.md`;
     const pathCodePy = `${pathFeature}/code.py`;
@@ -65,3 +62,4 @@ export const parseFeatures = (): Feature[] =>
       },
     ];
   });
+}

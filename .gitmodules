@@ -2,3 +2,7 @@
 	path = external/features/latest
 	url = https://github.com/openae-io/features.git
 	branch = main
+[submodule "external/datasets"]
+	path = external/datasets
+	url = https://github.com/openae-io/datasets.git
+	branch = main

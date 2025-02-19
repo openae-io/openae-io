@@ -4,7 +4,7 @@ editLink: false
 
 <script setup lang="ts">
 import { useData  } from "vitepress";
-import { data as features } from "../features.data";
+import { data as features } from "../../features.data";
 
 const { params } = useData();
 </script>
@@ -23,7 +23,7 @@ const { params } = useData();
   </thead>
   <tbody>
     <tr v-for="feature in features">
-      <td><code><a :href="`/features/latest/${feature.id}/`">{{ feature.id }}</a></code></td>
+      <td><code><a :href="`/standards/features/latest/${feature.id}/`">{{ feature.id }}</a></code></td>
       <td>{{ feature.meta.title }}</td>
       <td>
         <Badge v-for="tag in feature.meta.tags ?? []" :text="tag" />

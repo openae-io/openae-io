@@ -2,6 +2,7 @@ import { defineConfig } from "vitepress";
 import tasklists from "markdown-it-task-lists";
 
 import { parseFeatures } from "../features";
+import { parseDatasets } from "../datasets";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -36,9 +37,14 @@ export default defineConfig({
         activeMatch: `^/project/`,
       },
       {
-        text: "Features",
-        link: "/features/",
-        activeMatch: `^/features/`,
+        text: "Standards",
+        link: "/standards/",
+        activeMatch: `^/standards/`,
+      },
+      {
+        text: "Datasets",
+        link: "/datasets/",
+        activeMatch: `^/datasets/`,
       },
       {
         text: "Models",
@@ -47,55 +53,68 @@ export default defineConfig({
       },
     ],
 
-    sidebar: [
-      {
-        text: "Project",
-        items: [
-          { text: "Goals", link: "/project/goals" },
-          { text: "Contribute", link: "/project/contribute" },
-        ],
-      },
-      {
-        text: "Features",
-        items: [
-          {
-            text: "Overview",
-            link: "/features/",
-          },
-          {
-            text: "Algorithms",
-            items: [
-              {
-                text: "latest",
-                link: "/features/latest/",
-                collapsed: true,
-                items: parseFeatures().map((feature) => ({
-                  text: feature.meta.title,
-                  link: `/features/latest/${feature.id}/`,
-                })),
-              },
-            ],
-          },
-          { text: "Versioning", link: "/features/versioning" },
-          { text: "Implementations", link: "/features/implementations" },
-        ],
-      },
-      {
-        text: "Models",
-        link: "/models/index",
-        items: [{ text: "Overview", link: "/models/" }],
-      },
-    ],
+    sidebar: {
+      "/project/": [
+        {
+          text: "Project",
+          items: [
+            { text: "Goals", link: "/project/goals" },
+            { text: "Contribute", link: "/project/contribute" },
+          ],
+        },
+      ],
+      "/standards/": [
+        {
+          text: "Standards",
+          items: [{ text: "Overview", link: "/standards/" }],
+        },
+        {
+          text: "Feature extraction algorithms",
+          items: [
+            { text: "Intro", link: "/standards/features/" },
+            {
+              text: "Algorithms",
+              link: "/standards/features/latest/",
+              items: [
+                {
+                  text: "latest",
+                  link: "/standards/features/latest/",
+                  collapsed: false,
+                  items: parseFeatures().map((feature) => ({
+                    text: feature.meta.title,
+                    link: `/standards/features/latest/${feature.id}/`,
+                  })),
+                },
+              ],
+            },
+          ],
+        },
+      ],
+      "/datasets/": [
+        {
+          text: "Datasets",
+          items: parseDatasets().map((dataset) => ({
+            text: dataset.meta.title,
+            link: `/datasets/${dataset.id}/`,
+          })),
+        },
+      ],
+      "/models/": [],
+    },
 
     socialLinks: [{ icon: "github", link: "https://github.com/openae-io" }],
 
     editLink: {
       pattern: ({ filePath, params }) => {
-        if (filePath.startsWith("features/algorithm-")) {
-          return `https://github.com/openae-io/features/edit/main/${params.id}/README.md`;
-        } else {
-          return `https://github.com/openae-io/openae-io/edit/main/${filePath}`;
+        const baseUrl = "https://github.com/openae-io";
+        const filePathDatasets = "external/datasets/";
+        if (filePath.startsWith("standards/features/algorithm-")) {
+          return `${baseUrl}/features/edit/main/${params?.id}/README.md`;
         }
+        if (filePath.startsWith(filePathDatasets)) {
+          return `${baseUrl}/datasets/edit/main/${filePath.slice(filePathDatasets.length)}`;
+        }
+        return `${baseUrl}/openae-io/edit/main/${filePath}`;
       },
       text: "Edit this page on GitHub",
     },
@@ -116,10 +135,11 @@ export default defineConfig({
     },
     math: true,
   },
-  srcExclude: ["README.md", "external/**"],
+  srcExclude: ["README.md", "external/features/**"],
   rewrites: {
-    "features/algorithms-:version.md": "features/:version/index.md",
-    "features/algorithm-:version--:id.md": "features/:version/:id/index.md",
+    "standards/features/algorithms-:version.md": "standards/features/:version/index.md",
+    "standards/features/algorithm-:version--:id.md": "standards/features/:version/:id/index.md",
+    "external/datasets/:id/README.md": "datasets/:id/index.md",
   },
   sitemap: {
     hostname: "https://openae.io",

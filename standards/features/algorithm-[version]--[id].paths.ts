@@ -1,5 +1,5 @@
-import { parseFeatures } from "../features";
-const features = parseFeatures()
+import { parseFeatures } from "../../features";
+const features = parseFeatures();
 
 export default {
   paths() {
