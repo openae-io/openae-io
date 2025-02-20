@@ -21,11 +21,11 @@ features:
   - title: Open Data
     details: High-quality Acoustic Emission datasets.
     link: /datasets/
-    icon: 🛢️
+    icon: 📂
   - title: Library
     details: High-performance open-source implementation of the OpenAE standards.
     link: /library/
-    icon: 📦
+    icon: ⚙️
 ---
 
 <script setup>
