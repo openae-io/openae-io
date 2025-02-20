@@ -16,7 +16,7 @@ hero:
 features:
   - title: Open Standards
     details: Feature extraction algorithm definitions with reference implementations.
-    link: /features/
+    link: /standards/
     icon: 📖
   - title: Open Data
     details: High-quality Acoustic Emission datasets.
