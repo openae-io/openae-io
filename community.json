@@ -10,6 +10,11 @@
     "img": "uni-augsburg.svg"
   },
   {
+    "alt": "Fraunhofer IKTS",
+    "href": "https://www.ikts.fraunhofer.de",
+    "img": "ikts.png"
+  },
+  {
     "alt": "BCMtec",
     "href": "https://www.bcmtec.com",
     "img": "bcmtec.webp"
