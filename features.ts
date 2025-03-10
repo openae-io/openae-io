@@ -34,7 +34,7 @@ ${code}
 \`\`\`
 :::
 
-<VPButton text="Run in playground" href="${getPlaygroundUrl(code)}" />
+[Run in playground](${getPlaygroundUrl(code)})
 `;
 
 export function parseFeatures(): Feature[] {
