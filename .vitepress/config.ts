@@ -135,6 +135,15 @@ export default defineConfig({
       `,
     },
   },
+  srcExclude: ["README.md", "external/*/*/README.md"],
+  rewrites: {
+    "external/datasets/latest/:id/README.md": "datasets/:id/index.md",
+    "external/features/:version/:id/README.md": "standards/features/:version/:id/index.md",
+    "standards/features/algorithms-:version.md": "standards/features/:version/index.md",
+  },
+  sitemap: {
+    hostname: "https://openae.io",
+  },
   markdown: {
     config: (md) => {
       md.use(tasklists);
@@ -150,14 +159,5 @@ export default defineConfig({
       });
     },
     math: true,
-  },
-  srcExclude: ["README.md"],
-  rewrites: {
-    "external/datasets/latest/:id/README.md": "datasets/:id/index.md",
-    "external/features/:version/:id/README.md": "standards/features/:version/:id/index.md",
-    "standards/features/algorithms-:version.md": "standards/features/:version/index.md",
-  },
-  sitemap: {
-    hostname: "https://openae.io",
   },
 });
