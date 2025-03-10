@@ -10,10 +10,11 @@ import { data as datasets } from "../datasets.data";
 
 # Datasets
 
-OpenAE offers a platform to share high-quality Acoustic Emission datasets.
-These datasets enable researchers, engineers, and developers to test new methods, compare results, and drive innovation in the field.
+OpenAE offers a platform to share high-quality acoustic emission datasets under the CC BY 4.0 license.
+Each dataset includes comprehensive descriptions of the experimental setup and measurements, providing a valuable resource for researchers, engineers, and developers to test methods, compare results and advance data-driven acoustic emission analysis. 
 
-All datasets are managed in the GitHub repository https://github.com/openae-io/datasets.
+Datasets are managed in the GitHub repository https://github.com/openae-io/datasets, with measurement data hosted externally due to its large volume. 
+Contributions are welcomed through GitHub pull requests and users can request assistance by opening an [issue](https://github.com/openae-io/datasets/issues) or [discussion](https://github.com/orgs/openae-io/discussions).
 
 <table>
   <thead>
