@@ -18,14 +18,14 @@ features:
     details: Feature extraction algorithm definitions with reference implementations.
     link: /standards/
     icon: 📖
-  - title: Open Data
-    details: High-quality Acoustic Emission datasets.
-    link: /datasets/
-    icon: 📂
   - title: Library
     details: High-performance open-source implementation of the OpenAE standards.
     link: /library/
     icon: ⚙️
+  - title: Open Data
+    details: High-quality Acoustic Emission datasets.
+    link: /datasets/
+    icon: 📂
 ---
 
 <script setup>

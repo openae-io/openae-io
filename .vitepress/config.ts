@@ -44,14 +44,14 @@ export default defineConfig({
         activeMatch: `^/standards/`,
       },
       {
+        text: "Library",
+        link: "/library/index",
+        activeMatch: `^/library/`,
+      },
+      {
         text: "Datasets",
         link: "/datasets/",
         activeMatch: `^/datasets/`,
-      },
-      {
-        text: "Models",
-        link: "/models/index",
-        activeMatch: `^/models/`,
       },
     ],
 
