@@ -7,7 +7,14 @@ This is an important step for high-volume data like from acoustic emission or st
 Especially if rare events like failures should be detected, the data sets of failure cases are usually rare and not sufficient to train models with the raw sensor data directly (deep learning).
 The more dimensions the data has, the more data is needed to training data is needed. This is known as the [curse of dimensionality](https://en.wikipedia.org/wiki/Curse_of_dimensionality#Machine_learning).
 
-OpenAE defines [feature extraction algorithms](./latest/) in form of an open standard.
+National and international standards like [ISO 12716:2001](https://www.iso.org/standard/34090.html) and [ASTM E1316-17](https://doi.org/10.1520/E1316-17) define AE features such as *amplitude*, *duration*, *rise time*, *counts* and *energy*. These features, which focus on time-domain characteristics of the signal, are typically computed directly by acoustic emission measurement systems and can be processed in real-time, even with technology from 40 years ago. However, research has shown that incorporating advanced features including the frequency domain can significantly improve model robustness and accuracy in applications like condition monitoring and structural health monitoring. Many of the features are directly inspired by research from fields such as vibration analysis, speech recognition, and music information retrieval.
+
+OpenAE defines [feature extraction algorithms](./latest/) specifically tailored for acoustic emission in form of an open standard. These algorithms are selected based on the following criteria:
+- Algorithms should yield consistent results regardless of the sampling rate used during data acquisition.
+- Algorithms should handle signals of varying lengths or durations, supporting threshold-based, duration-adapted acquisition.
+- Algorithms should be robust: Minor variations in the signal should not significantly impact the results.
+- Algorithms that describe frequency domain characteristics should remain independent of the signal's total amplitude and energy.
+
 All definitions are managed and versioned in a GitHub repository https://github.com/openae-io/features.
 Each algorithm is unique identified with an `ID`.
 
