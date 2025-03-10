@@ -2,7 +2,7 @@ import fs from "node:fs";
 import fm from "front-matter";
 import { readFileIfExists } from "./utils";
 
-export const pathDatasets = "./external/datasets";
+export const pathDatasets = "./external/datasets/latest";
 
 export interface Dataset {
   id: string;

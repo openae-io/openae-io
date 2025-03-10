@@ -109,15 +109,18 @@ export default defineConfig({
     editLink: {
       pattern: ({ filePath }) => {
         const baseUrl = "https://github.com/openae-io";
-        const filePathDatasets = "external/datasets/";
-        const filePathFeatures = "external/features/latest/";
-        if (filePath.startsWith(filePathFeatures)) {
-          return `${baseUrl}/features/edit/main/${filePath.slice(filePathFeatures.length)}`;
+        let repository = "openae-io";
+        let branch = "main";
+        let relativePath = filePath;
+
+        const parts = filePath.split(/[\\/]/);
+        if (parts[0] === "external") {
+          repository = parts[1];
+          branch = parts[2] === "latest" ? "main" : parts[2];
+          relativePath = parts.slice(3).join("/");
         }
-        if (filePath.startsWith(filePathDatasets)) {
-          return `${baseUrl}/datasets/edit/main/${filePath.slice(filePathDatasets.length)}`;
-        }
-        return `${baseUrl}/openae-io/edit/main/${filePath}`;
+
+        return `${baseUrl}/${repository}/edit/${branch}/${relativePath}`;
       },
       text: "Edit this page on GitHub",
     },
@@ -150,7 +153,7 @@ export default defineConfig({
   },
   srcExclude: ["README.md"],
   rewrites: {
-    "external/datasets/:id/README.md": "datasets/:id/index.md",
+    "external/datasets/latest/:id/README.md": "datasets/:id/index.md",
     "external/features/:version/:id/README.md": "standards/features/:version/:id/index.md",
     "standards/features/algorithms-:version.md": "standards/features/:version/index.md",
   },
