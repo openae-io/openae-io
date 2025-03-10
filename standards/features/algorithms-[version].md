@@ -23,11 +23,9 @@ const { params } = useData();
   </thead>
   <tbody>
     <tr v-for="feature in features">
-      <td><code><a :href="`/standards/features/latest/${feature.id}/`">{{ feature.id }}</a></code></td>
+      <td><code><a :href="`/standards/features/${params.version}/${feature.id}/`">{{ feature.id }}</a></code></td>
       <td>{{ feature.meta.title }}</td>
-      <td>
-        <Badge v-for="tag in feature.meta.tags ?? []" :text="tag" />
-      </td>
+      <td><Badge v-for="tag in feature.meta.tags ?? []" :text="tag" /></td>
     </tr>
   </tbody>
 </table>

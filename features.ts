@@ -1,4 +1,5 @@
 import fs from "node:fs";
+import path from "node:path";
 import fm from "front-matter";
 import { loadEnv } from "vitepress";
 import { readFileIfExists } from "./utils";
@@ -8,18 +9,17 @@ export const pathFeatures = "./external/features/latest";
 export interface Feature {
   id: string;
   meta: Record<string, any>;
-  readme: string;
   code: string | null;
 }
 
-function getPlaygroundUrl(code: string) {
+export function getPlaygroundUrl(code: string) {
   const env = loadEnv("", process.cwd());
   const url = new URL(env.VITE_FEATURES_PLAYGROUND_URL);
   url.searchParams.set("code", btoa(code ?? ""));
   return url;
 }
 
-const makeCodeSection = (code: string) => `
+export const makeCodeSection = (code: string) => `
 ## Code
 
 ::: info
@@ -39,25 +39,20 @@ ${code}
 
 export function parseFeatures(): Feature[] {
   return fs.readdirSync(pathFeatures).flatMap((feature) => {
-    const pathFeature = `${pathFeatures}/${feature}`;
-    const pathReadme = `${pathFeature}/README.md`;
-    const pathCodePy = `${pathFeature}/code.py`;
+    const pathFeature = path.resolve(pathFeatures, feature);
+    const pathReadme = path.resolve(pathFeature, "README.md");
+    const pathCodePy = path.resolve(pathFeature, "code.py");
 
     let readme = readFileIfExists(pathReadme);
     if (!readme) return [];
 
     const code = readFileIfExists(pathCodePy);
-    if (code) {
-      readme += makeCodeSection(code);
-    }
-
     const parsed = fm(readme);
 
     return [
       {
         id: feature,
         meta: parsed.attributes as Record<string, any>,
-        readme: parsed.body,
         code: code,
       },
     ];

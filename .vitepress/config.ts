@@ -1,8 +1,10 @@
-import { defineConfig } from "vitepress";
+import path from "node:path";
 import tasklists from "markdown-it-task-lists";
+import { defineConfig } from "vitepress";
 
-import { parseFeatures } from "../features";
+import { makeCodeSection, parseFeatures } from "../features";
 import { parseDatasets } from "../datasets";
+import { readFileIfExists } from "../utils";
 
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
@@ -105,11 +107,12 @@ export default defineConfig({
     socialLinks: [{ icon: "github", link: "https://github.com/openae-io" }],
 
     editLink: {
-      pattern: ({ filePath, params }) => {
+      pattern: ({ filePath }) => {
         const baseUrl = "https://github.com/openae-io";
         const filePathDatasets = "external/datasets/";
-        if (filePath.startsWith("standards/features/algorithm-")) {
-          return `${baseUrl}/features/edit/main/${params?.id}/README.md`;
+        const filePathFeatures = "external/features/latest/";
+        if (filePath.startsWith(filePathFeatures)) {
+          return `${baseUrl}/features/edit/main/${filePath.slice(filePathFeatures.length)}`;
         }
         if (filePath.startsWith(filePathDatasets)) {
           return `${baseUrl}/datasets/edit/main/${filePath.slice(filePathDatasets.length)}`;
@@ -132,14 +135,24 @@ export default defineConfig({
   markdown: {
     config: (md) => {
       md.use(tasklists);
+      md.core.ruler.before("normalize", "add_code", (state) => {
+        const filePath = state.env.realPath ?? state.env.path;
+        if (filePath && filePath.includes("features") && path.basename(filePath) === "README.md") {
+          const filePathCode = path.resolve(path.dirname(filePath), "code.py");
+          const code = readFileIfExists(filePathCode);
+          if (code) {
+            state.src += makeCodeSection(code);
+          }
+        }
+      });
     },
     math: true,
   },
-  srcExclude: ["README.md", "external/features/**"],
+  srcExclude: ["README.md"],
   rewrites: {
-    "standards/features/algorithms-:version.md": "standards/features/:version/index.md",
-    "standards/features/algorithm-:version--:id.md": "standards/features/:version/:id/index.md",
     "external/datasets/:id/README.md": "datasets/:id/index.md",
+    "external/features/:version/:id/README.md": "standards/features/:version/:id/index.md",
+    "standards/features/algorithms-:version.md": "standards/features/:version/index.md",
   },
   sitemap: {
     hostname: "https://openae.io",
