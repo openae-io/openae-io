@@ -1,10 +1,10 @@
 # Open Standards
 
-The **OpenAE standards** are open, freely accessible standards aimed at promoting consistency, transparency, and collaboration within the Acoustic Emission field.
-They enable researchers, engineers, and developers to advance the field by adopting standardized, reproducible methods.
+The **OpenAE standards** are open and community-driven standards for acoustic emission signal processing.
+They promote consistency, transparency, and collaboration, helping researchers, engineers, and developers advance the field with standardized, reproducible methods.
 
-Hosted on GitHub at https://github.com/openae-io, the OpenAE standards foster transparent, community-driven development.
-Anyone can contribute by reporting issues, proposing changes and submitting pull requests.
-GitHub's version control system ensures that changes are properly tracked.
+Currently, OpenAE focuses on defining [feature extraction algorithms](./features/) for data-driven applications.
 
-The current primary focus of the OpenAE is the definition of [feature extraction algorithms](./features/) tailored for data-driven applications.
+## Collaboration
+
+The OpenAE standards are developed transparently on [GitHub](https://github.com/openae-io), where anyone can contribute by reporting issues, proposing changes, and submitting pull requests. GitHub’s version control ensures proper tracking of all modifications.
