@@ -1,34 +1,55 @@
 ---
 editLink: true
-sidebar: true
+sidebar: false
 aside: false
 ---
 
 <script setup lang="ts">
+import { VPButton } from "vitepress/theme";
 import { data as datasets } from "../datasets.data";
 </script>
 
+<style lang="css" scoped>
+th, td {
+  vertical-align: top;
+}
+</style>
+
 # Datasets
 
-OpenAE offers a platform to share high-quality acoustic emission datasets under the CC BY 4.0 license.
-Each dataset includes comprehensive descriptions of the experimental setup and measurements, providing a valuable resource for researchers, engineers, and developers to test methods, compare results and advance data-driven acoustic emission analysis. 
+OpenAE provides high-quality acoustic emission datasets, each accompanied by detailed descriptions of the experimental setup and measurements. These datasets serve as a valuable resource for researchers, engineers, and developers to test methods, compare results, and further data-driven acoustic emission analysis.
 
-Datasets are managed in the GitHub repository https://github.com/openae-io/datasets, with measurement data hosted externally due to its large volume. 
-Contributions are welcomed through GitHub pull requests and users can request assistance by opening an [issue](https://github.com/openae-io/datasets/issues) or [discussion](https://github.com/orgs/openae-io/discussions).
+Datasets are hosted within the [OpenAE community of Zenodo](https://zenodo.org/communities/openae). Zenodo is an open-access repository that allows researchers to upload, share, and preserve a wide range of digital research outputs, including datasets, papers, and software. It is managed by CERN and provides a DOI (Digital Object Identifier) for each submission, ensuring long-term accessibility and citation.
 
 <table>
   <thead>
     <tr>
-      <th>ID</th>
       <th>Title</th>
-      <th>Author</th>
+      <th>Authors</th>
+      <th>License</th>
+      <th>DOI</th>
     </tr>
   </thead>
   <tbody>
     <tr v-for="dataset in datasets">
-      <td><code><a :href="`/datasets/${dataset.id}/`">{{ dataset.id }}</a></code></td>
-      <td>{{ dataset.meta.title }}</td>
-      <td>{{ dataset.meta.author }}</td>
+      <td>
+        <a :href="dataset.link" target="_blank">{{ dataset.title }}</a>
+      </td>
+      <td>
+        <span v-for="author in dataset.authors">
+          {{ author }}<br/>
+        </span>
+      </td>
+      <td>
+        {{ dataset.license.title }}
+      </td>
+      <td>
+        <a :href="`https://doi.org/${dataset.doi}`" target="_blank">
+          <code>{{ dataset.doi }}</code>
+        </a>
+      </td>
     </tr>
   </tbody>
 </table>
+
+<VPButton text="Add dataset" href="https://zenodo.org/uploads/new?community=openae" target="_blank" />

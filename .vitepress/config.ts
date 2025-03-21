@@ -3,7 +3,6 @@ import tasklists from "markdown-it-task-lists";
 import { defineConfig } from "vitepress";
 
 import { makeCodeSection, parseFeatures } from "../features";
-import { parseDatasets } from "../datasets";
 import { readFileIfExists } from "../utils";
 
 // https://vitepress.dev/reference/site-config
@@ -95,10 +94,7 @@ export default defineConfig({
       "/datasets/": [
         {
           text: "Datasets",
-          items: parseDatasets().map((dataset) => ({
-            text: dataset.meta.title,
-            link: `/datasets/${dataset.id}/`,
-          })),
+          items: [{ text: "Overview", link: "/datasets/" }],
         },
       ],
       "/models/": [],
