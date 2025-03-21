@@ -17,7 +17,7 @@ th, td {
 
 # Datasets
 
-OpenAE provides high-quality acoustic emission datasets, each accompanied by detailed descriptions of the experimental setup and measurements. These datasets serve as a valuable resource for researchers, engineers, and developers to test methods, compare results, and further data-driven acoustic emission analysis.
+OpenAE provides high-quality acoustic emission datasets with detailed experimental descriptions. These datasets support researchers, engineers, and developers in testing methods, comparing results, and advancing data-driven analysis.
 
 Datasets are hosted within the [OpenAE community of Zenodo](https://zenodo.org/communities/openae). Zenodo is an open-access repository that allows researchers to upload, share, and preserve a wide range of digital research outputs, including datasets, papers, and software. It is managed by CERN and provides a DOI (Digital Object Identifier) for each submission, ensuring long-term accessibility and citation.
 
