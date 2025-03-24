@@ -1,8 +1,8 @@
 # Goals
 
-**OpenAE is an open standard to empower data-based acoustic emission and structure-born sound applications.**
+OpenAE is an open, collaborative platform focused on advancing data-driven methods in the field of acoustic emission:
 
-1. [Open standard of feature algorithm definitions](/standards/features/). Each feature is identified by an ID and a version. Models can use those identifiers to unambiguously specify its inputs.
+1. [Open standard for feature algorithm definitions](/standards/features/). Each feature is identified by an ID and a version. Models can use those identifiers to unambiguously specify its inputs.
 2. [Implementations in different programming languages](/library/) to compute features in different environments and on different targets.
 3. [Share and reuse trained models](/models/) based on those standardized features. Models can reused in similar applications or new applications by utilizing transfer learning.
 
