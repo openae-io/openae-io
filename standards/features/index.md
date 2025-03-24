@@ -16,6 +16,8 @@ Each algorithm is unique identified with an `ID`.
 ## Criteria
 
 The algorithms are selected based on the following criteria:
+
+- Algorithms must be documented in a scientific paper.
 - Algorithms should yield consistent results regardless of the sampling rate used during data acquisition.
 - Algorithms should handle signals of varying lengths or durations, supporting threshold-based, duration-adapted acquisition.
 - Algorithms should be robust: Minor variations in the signal should not significantly impact the results.
