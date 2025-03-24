@@ -13,13 +13,14 @@ The goal is to provide a single, high-performance implementation that is accessi
 
 The library is written in C++ for best performance and includes bindings for popular programming languages to enable seamless integration across different environments.
 
-| Language              | Status         | Integration                                                                               |
-| --------------------- | -------------- | ----------------------------------------------------------------------------------------- |
-| C++                   | ✅ Done        | CMake or vcpkg                                                                            |
-| Python                | ✅ Done        | Download and install from [PyPI](https://pypi.org/project/openae/)                        |
-| MATLAB                | 🚧 In progress | Download package from [GitHub releases](https://github.com/openae-io/openae-lib/releases) |
-| C                     | ⌛ Planned     | CMake or vcpkg                                                                            |
-| WebAssembly / Node.js | ⌛ Planned     | Download and install from https://npmjs.org                                               |
+| Language              | Status         |
+| --------------------- | -------------- |
+| C++                   | ✅ Done        |
+| Python                | ✅ Done        |
+| MATLAB                | 🚧 In progress |
+| Vamp Plugin           | ⌛ Planned     |
+| C                     | ⌛ Planned     |
+| WebAssembly / Node.js | ⌛ Planned     |
 
 ## Links
 
