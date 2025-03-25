@@ -20,7 +20,7 @@ const recordsSchema = z.object({
               name: z.string(),
             })
           ),
-          keywords: z.array(z.string()),
+          keywords: z.array(z.string()).optional(),
           resource_type: z.object({
             type: z.string(),
           }),
@@ -115,29 +115,34 @@ async function fetchLicense(id: string): Promise<License> {
 }
 
 export async function fetchDatasets(): Promise<Dataset[]> {
-  const url = new URL("https://zenodo.org/api/records");
-  url.searchParams.set("sort", "mostrecent");
-  url.searchParams.set("page", "1");
-  url.searchParams.set("size", "100");
-  url.searchParams.set("communities", "openae");
-  const res = await fetch(url.toString());
-  const response = recordsSchema.parse(await res.json());
-  return await Promise.all(
-    response.hits.hits.map(async (hit) => ({
-      title: hit.metadata.title,
-      description: hit.metadata.description,
-      authors: hit.metadata.creators.map((creator) => creator.name),
-      license: await fetchLicense(hit.metadata.license.id),
-      doi: hit.metadata.doi,
-      link: hit.links.self_html,
-      files: hit.files
-        .map((file) => ({
-          id: file.id,
-          name: file.key,
-          size: file.size,
-          link: file.links.self,
-        }))
-        .sort((a, b) => a.name.localeCompare(b.name)),
-    }))
-  );
+  try {
+    const url = new URL("https://zenodo.org/api/records");
+    url.searchParams.set("sort", "mostrecent");
+    url.searchParams.set("page", "1");
+    url.searchParams.set("size", "100");
+    url.searchParams.set("communities", "openae");
+    const res = await fetch(url.toString());
+    const response = recordsSchema.parse(await res.json());
+    return await Promise.all(
+      response.hits.hits.map(async (hit) => ({
+        title: hit.metadata.title,
+        description: hit.metadata.description,
+        authors: hit.metadata.creators.map((creator) => creator.name),
+        license: await fetchLicense(hit.metadata.license.id),
+        doi: hit.metadata.doi,
+        link: hit.links.self_html,
+        files: hit.files
+          .map((file) => ({
+            id: file.id,
+            name: file.key,
+            size: file.size,
+            link: file.links.self,
+          }))
+          .sort((a, b) => a.name.localeCompare(b.name)),
+      }))
+    );
+  } catch (error) {
+    console.error(error);
+    throw error;
+  }
 }
