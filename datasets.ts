@@ -18,7 +18,7 @@ const recordsSchema = z.object({
           creators: z.array(
             z.object({
               name: z.string(),
-            })
+            }),
           ),
           keywords: z.array(z.string()).optional(),
           resource_type: z.object({
@@ -43,7 +43,7 @@ const recordsSchema = z.object({
             links: z.object({
               self: z.string(),
             }),
-          })
+          }),
         ),
         status: z.string(),
         stats: z.object({
@@ -52,7 +52,7 @@ const recordsSchema = z.object({
         }),
         state: z.string(),
         submitted: z.boolean(),
-      })
+      }),
     ),
     total: z.number(),
   }),
@@ -119,7 +119,7 @@ export async function fetchDatasets(): Promise<Dataset[]> {
     const url = new URL("https://zenodo.org/api/records");
     url.searchParams.set("sort", "mostrecent");
     url.searchParams.set("page", "1");
-    url.searchParams.set("size", "100");
+    url.searchParams.set("size", "25");
     url.searchParams.set("communities", "openae");
     const res = await fetch(url.toString());
     const response = recordsSchema.parse(await res.json());
@@ -139,7 +139,7 @@ export async function fetchDatasets(): Promise<Dataset[]> {
             link: file.links.self,
           }))
           .sort((a, b) => a.name.localeCompare(b.name)),
-      }))
+      })),
     );
   } catch (error) {
     console.error(error);
