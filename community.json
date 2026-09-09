@@ -43,5 +43,10 @@
     "alt": "Rowan University",
     "href": "https://www.rowan.edu",
     "img": "rowan-university.svg"
+  },
+  {
+    "alt": "Bundesanstalt für Materialforschung und -prüfung",
+    "href": "https://bam.de",
+    "img": "bam.svg"
   }
 ]
