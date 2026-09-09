@@ -52,4 +52,19 @@ Datasets are hosted within the [OpenAE community of Zenodo](https://zenodo.org/c
   </tbody>
 </table>
 
+## Add a new dataset
+
+Upload the dataset to the OpenAE community on Zenodo. An OpenAE curator reviews the submission before it shows up in the table above.
+
 <VPButton text="Add dataset" href="https://zenodo.org/uploads/new?community=openae" target="_blank" />
+
+## Link an existing Zenodo record
+
+A dataset that is already published on Zenodo does not have to be uploaded again. Submit the record to the OpenAE community instead. It keeps its DOI and its files, and it stays in every community it already belongs to. Only the person who uploaded the record can do this.
+
+1. Open the record page and click the cog wheel icon in the *Communities* box.
+2. Click **Submit to community** in the dropdown menu.
+3. Search for the OpenAE community and click **Select**.
+4. Tick the confirmation checkbox about curator access, optionally write a message to the curators, then click **Submit to community**.
+
+An OpenAE curator then accepts or declines the request. The Zenodo documentation shows each step in [Submit to community](https://help.zenodo.org/docs/share/submit-to-community/).
