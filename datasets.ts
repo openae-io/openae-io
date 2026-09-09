@@ -5,8 +5,8 @@ const recordsSchema = z.object({
   hits: z.object({
     hits: z.array(
       z.object({
-        created: z.string().datetime({ offset: true }),
-        modified: z.string().datetime({ offset: true }),
+        created: z.iso.datetime({ offset: true }),
+        modified: z.iso.datetime({ offset: true }),
         id: z.number(),
         doi: z.string(),
         metadata: z.object({
@@ -74,7 +74,7 @@ const licenseSchema = z.object({
     en: z.string(),
   }),
   icon: z.string(),
-  props: z.record(z.string()),
+  props: z.record(z.string(), z.string()),
 });
 
 export interface License {
@@ -102,16 +102,70 @@ export interface Dataset {
   files: DatasetFile[];
 }
 
-async function fetchLicense(id: string): Promise<License> {
-  const res = await fetch(`https://zenodo.org/api/vocabularies/licenses/${id}`);
-  const response = licenseSchema.parse(await res.json());
-  return {
-    id: response.id,
-    title: response.title.en,
-    description: response.description.en,
-    icon: response.icon,
-    link: response.props.url,
-  };
+const MAX_DELAY = 60_000; // rate limits reset within a minute
+const MAX_RETRIES = 4;
+
+const sleep = (ms: number) => new Promise((resolve) => setTimeout(resolve, ms));
+
+/**
+ * Fetch JSON with retries.
+ * Zenodo answers rate limits (429) and outages (5xx) with an HTML page,
+ * which would otherwise fail the build with a confusing JSON parse error.
+ * Rate limits: https://developers.zenodo.org/#rate-limiting
+ */
+async function fetchJson(url: string): Promise<unknown> {
+  for (let attempt = 0; ; attempt++) {
+    let error: string;
+    let retry = true;
+    let delay = 2 ** attempt * 1000;
+    try {
+      const res = await fetch(url, { headers: { Accept: "application/json" } });
+      const contentType = res.headers.get("content-type") ?? "";
+      if (res.ok && contentType.includes("json")) {
+        return await res.json();
+      }
+      error = res.ok
+        ? `unexpected content type "${contentType}"`
+        : `${res.status} ${res.statusText}`;
+      if (res.status === 429) {
+        // X-RateLimit-Reset is the Unix timestamp (seconds) when the limit resets
+        const reset = Number(res.headers.get("X-RateLimit-Reset")) * 1000 - Date.now();
+        delay = Math.min(Math.max(delay, reset), MAX_DELAY);
+        error += ` (limit ${res.headers.get("X-RateLimit-Limit")} requests per minute)`;
+      } else if (res.status >= 400 && res.status < 500) {
+        retry = false; // client errors won't go away by asking again
+      }
+    } catch (e) {
+      error = String(e);
+    }
+    if (!retry || attempt >= MAX_RETRIES) {
+      throw new Error(`Request to ${url} failed: ${error}`);
+    }
+    console.warn(`Request to ${url} failed (${error}), retrying in ${delay} ms`);
+    await sleep(delay);
+  }
+}
+
+// Licenses repeat across records, so cache to avoid hitting the rate limit
+const licenseCache = new Map<string, Promise<License>>();
+
+function fetchLicense(id: string): Promise<License> {
+  let license = licenseCache.get(id);
+  if (!license) {
+    license = fetchJson(`https://zenodo.org/api/vocabularies/licenses/${id}`).then((json) => {
+      const response = licenseSchema.parse(json);
+      return {
+        id: response.id,
+        title: response.title.en,
+        description: response.description.en,
+        icon: response.icon,
+        link: response.props.url,
+      };
+    });
+    license.catch(() => licenseCache.delete(id)); // don't cache failures
+    licenseCache.set(id, license);
+  }
+  return license;
 }
 
 export async function fetchDatasets(): Promise<Dataset[]> {
@@ -121,8 +175,7 @@ export async function fetchDatasets(): Promise<Dataset[]> {
     url.searchParams.set("page", "1");
     url.searchParams.set("size", "25");
     url.searchParams.set("communities", "openae");
-    const res = await fetch(url.toString());
-    const response = recordsSchema.parse(await res.json());
+    const response = recordsSchema.parse(await fetchJson(url.toString()));
     return await Promise.all(
       response.hits.hits.map(async (hit) => ({
         title: hit.metadata.title,
